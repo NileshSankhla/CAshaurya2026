@@ -6,7 +6,7 @@ const Footer = () => {
     {
       name: 'Rupali Hingankar',
       role: 'Publicity & Marketing Head',
-      image: '/logos/Rupali2.jpg',
+      image: '/logos/Rupali.jpg',
       linkedin: 'https://linkedin.com/in/johndoe',
       instagram: 'https://instagram.com/johndoe',
       email: 'mailto:johndoe@example.com',
