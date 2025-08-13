@@ -7,17 +7,17 @@ const Footer = () => {
       name: 'Rupali Hingankar',
       role: 'Publicity & Marketing Head',
       image: '/logos/Rupali.jpg',
-      linkedin: 'https://linkedin.com/in/johndoe',
+      linkedin: 'https://www.linkedin.com/in/rupali-hingankar-7363ba288/',
       instagram: 'https://instagram.com/johndoe',
-      email: 'mailto:johndoe@example.com',
+      email: 'mailto:rupalihingankar.shaurya.iitkgp@gmail.com',
     },
     {
       name: 'Shivraj Gulve',
       role: 'Publicity & Marketing Head',
       image: '/logos/Shivraj.jpg',
-      linkedin: 'https://linkedin.com/in/janesmith',
+      linkedin: 'https://www.linkedin.com/in/shivraj-gulve-6583952bb/',
       instagram: 'https://instagram.com/janesmith',
-      email: 'mailto:janesmith@example.com',
+      email: 'mailto:shivrajgulve.shaurya.iitkgp@gmail.com',
     },
   ];
 
@@ -35,7 +35,7 @@ const Footer = () => {
           </p>
           <div className="flex justify-center gap-4 text-yellow-400 text-2xl">
             <a
-              href="https://instagram.com/shauryaiitkgp"
+              href="https://www.instagram.com/shaurya.iitkgp/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors"
@@ -43,7 +43,7 @@ const Footer = () => {
               <FaInstagram />
             </a>
             <a
-              href="https://linkedin.com/company/shauryaiitkgp"
+              href="https://www.linkedin.com/company/shaurya-iit-kharagpur/posts/?feedView=all"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors"
@@ -51,7 +51,7 @@ const Footer = () => {
               <FaLinkedin />
             </a>
             <a
-              href="https://www.youtube.com/@shauryaiitkgp"
+              href="https://www.youtube.com/@ShauryaIITKharagpur"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors"
