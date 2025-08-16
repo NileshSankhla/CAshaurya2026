@@ -16,7 +16,7 @@ const Footer = () => {
       role: 'Publicity & Marketing Head',
       image: '/logos/Shivraj.jpg',
       linkedin: 'https://www.linkedin.com/in/shivraj-gulve-6583952bb/',
-      instagram: 'https://instagram.com/janesmith',
+      instagram: 'https://www.instagram.com/_shiv.__07_?igsh=MWRwd3BqcWxyNHlzOA==',
       email: 'mailto:shivrajgulve.shaurya.iitkgp@gmail.com',
     },
   ];
