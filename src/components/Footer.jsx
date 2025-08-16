@@ -8,7 +8,7 @@ const Footer = () => {
       role: 'Publicity & Marketing Head',
       image: '/logos/Rupali.jpg',
       linkedin: 'https://www.linkedin.com/in/rupali-hingankar-7363ba288/',
-      instagram: 'https://instagram.com/johndoe',
+      instagram: 'https://www.instagram.com/hingankarrupali?igsh=bDNjdDU3ZTQ1YjZw',
       email: 'mailto:rupalihingankar.shaurya.iitkgp@gmail.com',
     },
     {
