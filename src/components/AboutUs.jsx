@@ -12,7 +12,7 @@ const paragraphParts = [
     direction: "right",
   },
   {
-    text: "Now in its sixth edition, Shaurya brings together passion, competition, and camaraderie, offering a stage where athletes can showcase their skills, push their limits, and create unforgettable memories.",
+    text: "Now in its 7th edition, Shaurya brings together passion, competition, and camaraderie, offering a stage where athletes can showcase their skills, push their limits, and create unforgettable memories.",
     direction: "left",
   },
   {
