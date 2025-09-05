@@ -241,7 +241,7 @@ export default function RegisterForm() {
         {error?.field === 'motivation' && <div className="text-red-500 text-sm mt-1">{error.message}</div>}
       </div>
 
-      <button type="submit" className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+      <button type="submit" className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer">
         Submit Application
       </button>
     </form>
