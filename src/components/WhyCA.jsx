@@ -52,7 +52,7 @@ const WhyCA = () => {
       className="min-h-screen flex items-center justify-center text-white px-4 py-16 font-['Poppins']"
     >
       <div className="w-full max-w-4xl text-center">
-        <h2 className="text-4xl font-['Playwrite_AU_QLD'] bg-gradient-to-r from-yellow-400 to-red-500 text-transparent bg-clip-text mb-10 text-center">
+        <h2 className="text-4xl font-bungee bg-gradient-to-r from-yellow-400 to-red-500 text-transparent bg-clip-text mb-10 text-center">
           Why CA?
         </h2>
 

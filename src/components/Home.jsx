@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const Home = ({ showRegister }) => {
   const heading = "Shaurya Campus Ambassador";
   const navigate = useNavigate();
@@ -42,8 +43,23 @@ const Home = ({ showRegister }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center ">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="text-center px-6">
+        
+        {/* ✅ PNG Image at Top
+        <div className="flex flex-col items-center mb-6">
+          <img
+            src="/logos/Platinum_Jubilee.png"
+            alt="Platinum Jubilee Logo"
+            className="w-96 h-96 object-contain mb-2"
+          />
+          <p className="text-gray-300 text-lg italic">
+            Igniting Passion, Inspiring Leaders
+          </p>
+          <hr className="w-40 border-t-2 border-yellow-400 mt-2" />
+        </div> */}
+
+        {/* ✅ Animated Heading */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold drop-shadow-lg leading-tight flex flex-wrap justify-center">
           {words.map((word, idx) => (
             <span
@@ -57,10 +73,12 @@ const Home = ({ showRegister }) => {
           ))}
         </h1>
 
+        {/* ✅ Subtext */}
         <p className="mt-6 text-lg sm:text-xl text-gray-300 max-w-xl mx-auto">
           Be the face of Shaurya on your campus. Lead. Inspire. Grow.
         </p>
 
+        {/* ✅ Button or Loader */}
         {!loading ? (
           <button
             onClick={handleClick}

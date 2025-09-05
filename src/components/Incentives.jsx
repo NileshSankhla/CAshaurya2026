@@ -69,7 +69,7 @@ const FlipCard = ({ animation, title, description }) => {
 const Incentives = () => {
   return (
     <div className="min-h-screen flex flex-col font-['Poppins'] items-center px-6 pt-24 pb-12 text-white">
-      <h2 className="text-5xl font-['Playwrite_AU_QLD'] bg-gradient-to-r from-yellow-400 to-red-500 text-transparent bg-clip-text mb-10 text-center">
+      <h2 className="text-5xl font-bungee bg-gradient-to-r from-yellow-400 to-red-500 text-transparent bg-clip-text mb-10 text-center">
         Incentives
       </h2>
 

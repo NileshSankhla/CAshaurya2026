@@ -37,9 +37,9 @@ const cardVariants = {
 const Responsibilities = () => {
   return (
     <div className="min-h-screen flex flex-col items-center px-6 pt-24 pb-12 font-['Poppins'] text-white">
-      <h2 className="text-5xl font-['Playwrite_AU_QLD'] bg-gradient-to-r from-yellow-400 to-red-500 text-transparent bg-clip-text mb-10 text-center">
+      <h1 className="text-5xl font-bungee bg-gradient-to-r from-yellow-400 to-red-500 text-transparent bg-clip-text mb-10 text-center">
         Responsibilities
-      </h2>
+      </h1>
 
       <div className="flex flex-col text-md font-bold font-['Ubuntu'] sm:flex-row flex-wrap justify-center items-center gap-8 max-w-6xl w-full">
         {responsibilities.map((item, index) => (

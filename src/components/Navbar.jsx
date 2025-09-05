@@ -3,7 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 
 const Navbar = ({ scrollTo, isMobile }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation(); // to detect active route
+  const [activeSection, setActiveSection] = useState("home");
+  const location = useLocation();
 
   const linksLeft = [
     { name: "Home", path: "/" },
@@ -17,16 +18,20 @@ const Navbar = ({ scrollTo, isMobile }) => {
   ];
   const allLinks = [...linksLeft, ...linksRight];
 
-  // If mobile, we scroll to section, else we use normal Link
   const NavItem = ({ name, path }) => {
-    const isActive = location.pathname === path;
+    // Active detection
+    const isActive = isMobile
+      ? activeSection === (path === "/" ? "home" : path.replace("/", ""))
+      : location.pathname === path;
 
     if (isMobile) {
-      // Mobile version: scroll on click + close menu
+      // Mobile: scroll & set active
       return (
         <button
           onClick={() => {
-            scrollTo(path.replace("/", "") || "home"); // map "/" to "home"
+            const sectionId = path === "/" ? "home" : path.split("/")[1];
+            scrollTo(sectionId);
+            setActiveSection(sectionId);
             setMenuOpen(false);
           }}
           className={`relative group font-medium text-lg tracking-wide px-1 transition duration-300 block lg:inline-block ${
@@ -42,7 +47,7 @@ const Navbar = ({ scrollTo, isMobile }) => {
       );
     }
 
-    // Desktop version: normal router Link
+    // Desktop: normal router Link
     return (
       <Link
         to={path}
@@ -64,10 +69,10 @@ const Navbar = ({ scrollTo, isMobile }) => {
     <>
       <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md">
         <nav className="bg-black/80 sm:bg-black/40 text-white w-full px-6 sm:px-10 lg:px-20 h-20 flex items-center relative flex-col lg:flex-row">
-          {/* Mobile Navbar: Logo left + Hamburger right */}
+          {/* Mobile Navbar */}
           <div className="flex lg:hidden w-full items-center justify-between px-6 h-20 z-50 relative">
             <Link to="/" onClick={() => setMenuOpen(false)}>
-              <img src="/logos/Shaurya_Logo.png" alt="Logo" className="w-14 h-auto" />
+              <img src="/logos/Shaurya_Logo.png" alt="Logo" className="w-20 h-auto" />
             </Link>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -98,7 +103,7 @@ const Navbar = ({ scrollTo, isMobile }) => {
             </button>
           </div>
 
-          {/* Mobile Sliding Menu (Right to Left) with blur */}
+          {/* Mobile Menu */}
           <div
             className={`fixed top-20 right-0 h-[calc(100vh-5rem)] w-64 backdrop-blur-md bg-black flex flex-col items-center space-y-6 py-6 z-50 transform transition-transform duration-300 ease-in-out lg:hidden ${
               menuOpen ? "translate-x-0" : "translate-x-full"
@@ -121,7 +126,7 @@ const Navbar = ({ scrollTo, isMobile }) => {
             {/* Center logo */}
             <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
               <Link to="/" onClick={() => setMenuOpen(false)}>
-                <img src="/logos/Shaurya_Logo.png" alt="Logo" className="w-14 h-auto" />
+                <img src="/logos/Shaurya_Logo.png" alt="Logo" className="w-20 h-auto" />
               </Link>
             </div>
 
@@ -135,7 +140,7 @@ const Navbar = ({ scrollTo, isMobile }) => {
         </nav>
       </div>
 
-      {/* Spacer to push content below fixed nav */}
+      {/* Spacer */}
       <div className="h-20 w-full" />
     </>
   );

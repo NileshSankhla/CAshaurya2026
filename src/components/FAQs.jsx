@@ -95,7 +95,7 @@ const FAQ = () => {
   return (
     <div id="faq" className="min-h-screen px-4 py-20 font-['Poppins'] text-white flex flex-col items-center justify-center">
       <div className="w-full max-w-4xl text-center">
-        <h2 className="text-4xl font-['Playwrite_AU_QLD'] mb-10 text-transparent bg-gradient-to-r from-yellow-400 to-red-500 bg-clip-text">
+        <h2 className="text-4xl font-bungee mb-10 text-transparent bg-gradient-to-r from-yellow-400 to-red-500 bg-clip-text">
           Frequently Asked Questions
         </h2>
         <motion.div
