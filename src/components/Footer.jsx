@@ -9,7 +9,7 @@ const Footer = () => {
       image: '/logos/Rupali.jpg',
       linkedin: 'https://www.linkedin.com/in/rupali-hingankar-7363ba288/',
       instagram: 'https://www.instagram.com/hingankarrupali?igsh=bDNjdDU3ZTQ1YjZw',
-      email: 'mailto:rupalihingankar.shaurya.iitkgp@gmail.com',
+      email: 'rupalihingankar.shaurya.iitkgp@gmail.com',
     },
     {
       name: 'Shivraj Gulve',
@@ -17,9 +17,13 @@ const Footer = () => {
       image: '/logos/Shivraj.jpg',
       linkedin: 'https://www.linkedin.com/in/shivraj-gulve-6583952bb/',
       instagram: 'https://www.instagram.com/_shiv.__07_?igsh=MWRwd3BqcWxyNHlzOA==',
-      email: 'mailto:shivrajgulve.shaurya.iitkgp@gmail.com',
+      email: 'shivrajgulve.shaurya.iitkgp@gmail.com',
     },
   ];
+
+  // Helper function to open Gmail compose link
+  const getGmailLink = (email) =>
+    `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
 
   return (
     <footer className="bg-black/70 border-t-2 border-yellow-400 px-6 py-10 text-white font-['Poppins']">
@@ -59,7 +63,9 @@ const Footer = () => {
               <FaYoutube />
             </a>
             <a
-              href="mailto:shaurya@iitkgp.ac.in"
+              href={getGmailLink("shaurya@iitkgp.ac.in")}
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-white transition-colors"
             >
               <FaEnvelope />
@@ -100,7 +106,9 @@ const Footer = () => {
                   <FaInstagram />
                 </a>
                 <a
-                  href={person.email}
+                  href={getGmailLink(person.email)}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
                   <FaEnvelope />

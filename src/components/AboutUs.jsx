@@ -53,7 +53,7 @@ const AboutUs = () => {
     >
       <div className="w-full max-w-4xl text-center">
         {/* Updated Heading Style */}
-        <h2 className="text-4xl font-['Playwrite_AU_QLD'] bg-gradient-to-r from-yellow-300 to-red-500 text-transparent bg-clip-text mb-10 text-center">
+        <h2 className="text-5xl font-sans bg-gradient-to-r from-yellow-300 to-red-500 text-transparent bg-clip-text mb-10 text-center">
           About Us
         </h2>
 
