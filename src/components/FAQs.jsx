@@ -72,7 +72,7 @@ const FAQ = () => {
 
     try {
       // 🔥 SEND TO BACKEND
-      const res = await fetch('http://localhost:5000/api/faq', {
+      const res = await fetch('https://ca-backend-2025-0v6s.onrender.com/api/faq', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
