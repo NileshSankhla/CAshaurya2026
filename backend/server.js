@@ -1,63 +1,70 @@
-// server.js
+//backend/server.js
+
+
+/* eslint-env node */
 const express = require('express');
-const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 
 dotenv.config();
 
 const app = express();
-const allowedOrigins = ['http://localhost:5173', 'https://your-domain.com'];
 
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-}));
+// ✅ Trust proxy (important if CIC puts Nginx/Apache in front)
+app.set('trust proxy', 1);
+
+// Allowed origins (update with your actual frontend domains)
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://your-domain.com',
+  'https://c-ashaurya2025latest-we1m.vercel.app'
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB connected'))
-.catch((err) => console.error('MongoDB connection error:', err));
-
-
-// Limiter to prevent abuse
-// This will limit requests to 10 per minute per IP
-const rateLimit = require('express-rate-limit');
-
+// ✅ Rate limiter (10 requests/minute per IP)
 const limiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 10, // max 10 requests per minute
+  windowMs: 60 * 1000,
+  max: 10,
   message: 'Too many requests, please try again later.',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use(limiter);
+
+// --- DB test route (add here) ---
+app.get('/db-test', async (req, res) => {
+  try {
+    const [rows] = await require('./db').query('SELECT NOW() AS currentTime');
+    res.json({ success: true, dbTime: rows[0].currentTime });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
 });
 
-app.use(limiter); // before routes
-
-
-// Routes
+// ✅ Routes
 app.use('/api/register', require('./routes/register'));
 app.use('/api/faq', require('./routes/faq'));
 
+// ✅ Root health check
+app.get('/', (req, res) => {
+  res.send('✅ Shaurya backend is running with MySQL');
+});
 
+// ✅ Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
-// ✅ middleware/auth.js
-module.exports = (req, res, next) => {
-  const token = req.headers['x-api-key'];
-  if (token !== process.env.ADMIN_SECRET) {
-    return res.status(403).json({ message: 'Forbidden' });
-  }
-  next();
-};
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
