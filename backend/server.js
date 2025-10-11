@@ -4,6 +4,7 @@
 /* eslint-env node */
 const express = require('express');
 const dotenv = require('dotenv');
+const db = require('./db'); // import after dotenv
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 
