@@ -17,8 +17,7 @@ app.set('trust proxy', 1);
 // Allowed origins (update with your actual frontend domains)
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://your-domain.com',
-  'https://c-ashaurya2025latest-we1m.vercel.app'
+  'https://ca.shauryaiitkgp.in',
 ];
 
 app.use(
@@ -49,12 +48,16 @@ app.use(limiter);
 // --- DB test route (add here) ---
 app.get('/db-test', async (req, res) => {
   try {
-    const [rows] = await require('./db').query('SELECT NOW() AS currentTime');
+    const { pool } = require('./db');
+    const [rows] = await pool.query('SELECT NOW() AS currentTime');
     res.json({ success: true, dbTime: rows[0].currentTime });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
 });
+
+const { initDB } = require('./db');
+initDB();
 
 // ✅ Routes
 app.use('/api/register', require('./routes/register'));

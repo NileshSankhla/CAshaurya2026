@@ -1,3 +1,5 @@
+// src/app.jsx
+
 import React, { useRef, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";

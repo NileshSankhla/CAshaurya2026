@@ -1,6 +1,6 @@
 // backend/models/registrationModel.js
 
-const pool = require('../db');
+const { pool } = require('../db');
 
 async function createRegistration(data) {
   try {
@@ -17,7 +17,8 @@ async function createRegistration(data) {
     const [result] = await pool.query(sql, values);
     return { id: result.insertId, ...data };
   } catch (err) {
-    throw new Error('DB Error: Could not insert registration');
+    if(err)
+      throw new Error('DB Error: Could not insert registration');
   }
 }
 
@@ -26,7 +27,8 @@ async function getAllRegistrations() {
     const [rows] = await pool.query("SELECT * FROM registrations ORDER BY created_at DESC");
     return rows;
   } catch (err) {
-    throw new Error('DB Error: Could not fetch registrations');
+    if(err)
+      throw new Error('DB Error: Could not fetch registrations');
   }
 }
 

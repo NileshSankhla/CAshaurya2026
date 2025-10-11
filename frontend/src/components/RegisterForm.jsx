@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 export default function RegisterForm() {
   const [form, setForm] = useState({
@@ -85,7 +86,7 @@ export default function RegisterForm() {
     }
 
     try {
-      const res = await fetch('https://ca-backend-2025-0v6s.onrender.com/api/register', {
+      const res = await fetch(`${API_BASE}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),

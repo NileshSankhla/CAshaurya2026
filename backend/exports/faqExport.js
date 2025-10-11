@@ -1,7 +1,7 @@
 // backend/exports/faqExport.js
 
 /* eslint-env node */
-const db = require('../backend/db');
+const db = require('../db');
 const ExcelJS = require('exceljs');
 
 async function exportFAQs(filePath = 'faqs.xlsx') {

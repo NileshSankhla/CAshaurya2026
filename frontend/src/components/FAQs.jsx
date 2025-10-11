@@ -1,6 +1,8 @@
 // src/components/FAQs.jsx
 
 import React, { useState } from 'react';
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 import { motion } from 'framer-motion';
 
 const faqs = [
@@ -72,12 +74,11 @@ const FAQ = () => {
 
     try {
       // 🔥 SEND TO BACKEND
-      const res = await fetch('https://ca-backend-2025-0v6s.onrender.com/api/faq', {
+      const res = await fetch(`${API_BASE}/api/faq`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-
       if (!res.ok) {
         throw new Error('Failed to submit');
       }

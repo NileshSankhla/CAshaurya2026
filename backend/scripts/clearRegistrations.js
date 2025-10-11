@@ -3,7 +3,7 @@
 /* eslint-env node */
 require('dotenv').config();
 const readline = require('readline');
-const db = require('../db');
+const { pool } = require('../db');
 
 (async () => {
   try {

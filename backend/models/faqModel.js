@@ -1,6 +1,6 @@
 // backend/models/faqModel.js
 
-const pool = require('../db');
+const { pool } = require('../db');
 
 async function createFAQ({ name, phone, email, question }) {
   try {
@@ -10,7 +10,8 @@ async function createFAQ({ name, phone, email, question }) {
     );
     return { id: result.insertId, name, phone, email, question };
   } catch (err) {
-    throw new Error('DB Error: Could not insert FAQ');
+    if(err)
+      throw new Error('DB Error: Could not insert FAQ');
   }
 }
 
@@ -19,7 +20,8 @@ async function getAllFAQs() {
     const [rows] = await pool.query("SELECT * FROM faqs ORDER BY created_at DESC");
     return rows;
   } catch (err) {
-    throw new Error('DB Error: Could not fetch FAQs');
+    if(err)
+      throw new Error('DB Error: Could not fetch FAQs');
   }
 }
 
