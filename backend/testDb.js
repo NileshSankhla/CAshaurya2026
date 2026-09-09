@@ -1,7 +1,7 @@
 //testDb.js
 
 require('dotenv').config();
-const pool = require('./db');
+const { pool } = require('./db');
 
 async function testConnection() {
   try {

@@ -1,149 +1,111 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const Navbar = ({ scrollTo, isMobile }) => {
+const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
   const location = useLocation();
 
-  const linksLeft = [
-    { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
-    { name: "Why CA", path: "/whyca" },
+  const links = [
+    { name: "HOME", path: "/" },
+    { name: "ABOUT US", path: "/about" },
+    { name: "WHY CA", path: "/whyca" },
+    { name: "RESPONSIBILITIES", path: "/responsibilities" },
+    { name: "INCENTIVES", path: "/incentives" },
+    { name: "FAQ", path: "/faqs" },
   ];
-  const linksRight = [
-    { name: "Responsibilities", path: "/responsibilities" },
-    { name: "Incentives", path: "/incentives" },
-    { name: "FAQs", path: "/faqs" },
-  ];
-  const allLinks = [...linksLeft, ...linksRight];
-
-  const NavItem = ({ name, path }) => {
-    // Active detection
-    const isActive = isMobile
-      ? activeSection === (path === "/" ? "home" : path.replace("/", ""))
-      : location.pathname === path;
-
-    if (isMobile) {
-      // Mobile: scroll & set active
-      return (
-        <button
-          onClick={() => {
-            const sectionId = path === "/" ? "home" : path.split("/")[1];
-            scrollTo(sectionId);
-            setActiveSection(sectionId);
-            setMenuOpen(false);
-          }}
-          className={`relative group font-medium text-lg tracking-wide px-1 transition duration-300 block lg:inline-block ${
-            isActive ? "text-yellow-400" : "text-white"
-          }`}
-        >
-          <span className="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-yellow-400 group-hover:to-red-500">
-            {name}
-          </span>
-          <span className="absolute left-0 top-0 w-full h-[2px] bg-gradient-to-r from-yellow-400 to-red-500 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
-          <span className="absolute left-0 bottom-0 w-full h-[2px] bg-gradient-to-r from-yellow-400 to-red-500 scale-x-0 group-hover:scale-x-100 origin-right transition-transform duration-300" />
-        </button>
-      );
-    }
-
-    // Desktop: normal router Link
-    return (
-      <Link
-        to={path}
-        onClick={() => setMenuOpen(false)}
-        className={`relative group font-medium text-lg tracking-wide px-1 transition duration-300 block lg:inline-block ${
-          isActive ? "text-yellow-400" : "text-white"
-        }`}
-      >
-        <span className="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-yellow-400 group-hover:to-red-500">
-          {name}
-        </span>
-        <span className="absolute left-0 top-0 w-full h-[2px] bg-gradient-to-r from-yellow-400 to-red-500 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
-        <span className="absolute left-0 bottom-0 w-full h-[2px] bg-gradient-to-r from-yellow-400 to-red-500 scale-x-0 group-hover:scale-x-100 origin-right transition-transform duration-300" />
-      </Link>
-    );
-  };
 
   return (
-    <>
-      <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md">
-        <nav className="bg-black/80 sm:bg-black/40 text-white w-full px-6 sm:px-10 lg:px-20 h-20 flex items-center relative flex-col lg:flex-row">
-          {/* Mobile Navbar */}
-          <div className="flex lg:hidden w-full items-center justify-between px-6 h-20 z-50 relative">
-            <Link to="/" onClick={() => setMenuOpen(false)}>
-              <img src="/logos/Shaurya_Logo.png" alt="Logo" className="w-20 h-auto" />
-            </Link>
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle menu"
-              className="focus:outline-none"
-            >
-              {menuOpen ? (
-                <svg
-                  className="w-8 h-8 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg
-                  className="w-8 h-8 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-              )}
-            </button>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-yellow-500/30">
+      {/* 🖤 Header Nav */}
+      <nav className="max-w-7xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between">
+        {/* Left: Logo & Title */}
+        <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center space-x-3 group">
+          <img src="/logos/Shaurya_Logo.png" alt="Shaurya Logo" className="w-10 h-auto group-hover:scale-105 transition-transform" />
+          <div className="flex flex-col">
+            <span className="font-black text-lg tracking-wider text-white">
+              SHAURYA
+            </span>
+            <span className="text-[9px] text-yellow-400 tracking-widest uppercase font-semibold">
+              TECHNOLOGY STUDENTS' GYMKHANA
+            </span>
           </div>
+        </Link>
 
-          {/* Mobile Menu */}
-          <div
-            className={`fixed top-20 right-0 h-[calc(100vh-5rem)] w-64 backdrop-blur-md bg-black flex flex-col items-center space-y-6 py-6 z-50 transform transition-transform duration-300 ease-in-out lg:hidden ${
-              menuOpen ? "translate-x-0" : "translate-x-full"
-            }`}
-          >
-            {allLinks.map(({ name, path }, idx) => (
-              <NavItem key={idx} name={name} path={path} />
-            ))}
-          </div>
-
-          {/* Desktop Navbar */}
-          <div className="hidden lg:flex w-full items-center justify-between relative text-[18px]">
-            {/* Left tabs */}
-            <div className="flex space-x-8 xl:space-x-20 flex-shrink min-w-0 max-w-[40%] truncate">
-              {linksLeft.map(({ name, path }, idx) => (
-                <NavItem key={idx} name={name} path={path} />
-              ))}
-            </div>
-
-            {/* Center logo */}
-            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-              <Link to="/" onClick={() => setMenuOpen(false)}>
-                <img src="/logos/Shaurya_Logo.png" alt="Logo" className="w-20 h-auto" />
+        {/* Center: Desktop Navigation Links */}
+        <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 text-xs font-bold tracking-wider">
+          {links.map((link) => {
+            const isActive = location.pathname === link.path;
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`relative py-1 transition-colors duration-200 ${
+                  isActive ? "text-yellow-400" : "text-gray-300 hover:text-white"
+                }`}
+              >
+                {link.name}
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-yellow-400 rounded-full" />
+                )}
               </Link>
-            </div>
+            );
+          })}
+        </div>
 
-            {/* Right tabs */}
-            <div className="flex space-x-8 xl:space-x-20 flex-shrink min-w-0 max-w-[40%] truncate justify-end">
-              {linksRight.map(({ name, path }, idx) => (
-                <NavItem key={idx} name={name} path={path} />
-              ))}
-            </div>
-          </div>
-        </nav>
-      </div>
+        {/* Right: CTA Button */}
+        <div className="hidden sm:flex items-center space-x-4">
+          <Link
+            to="/register"
+            className="px-4 py-1.5 rounded font-extrabold text-xs tracking-wider uppercase text-black bg-yellow-400 hover:bg-yellow-300 transition-all duration-200"
+          >
+            BECOME A CA
+          </Link>
+        </div>
 
-      {/* Spacer */}
-      <div className="h-20 w-full" />
-    </>
+        {/* Mobile Menu Toggle Button */}
+        <div className="flex lg:hidden items-center space-x-3">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle navigation menu"
+            className="p-2 text-gray-300 hover:text-white focus:outline-none"
+          >
+            {menuOpen ? (
+              <svg className="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Drawer Menu */}
+      {menuOpen && (
+        <div className="lg:hidden bg-black border-b border-yellow-500/30 px-6 py-4 space-y-3">
+          {links.map((link) => {
+            const isActive = location.pathname === link.path;
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setMenuOpen(false)}
+                className={`block text-base font-semibold tracking-wider py-1.5 border-b border-white/10 ${
+                  isActive ? "text-yellow-400 pl-2" : "text-gray-300 hover:text-white"
+                }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+        </div>
+      )}
+    </header>
   );
 };
 
 export default Navbar;
+
+

@@ -1,6 +1,6 @@
-// src/app.jsx
+// src/App.jsx
 
-import React, { useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -12,83 +12,31 @@ import Incentives from "./components/Incentives";
 import FAQ from "./components/FAQs";
 import Register from "./components/Register";
 
-const ScrollRouter = () => {
-  const refs = {
-    home: useRef(null),
-    about: useRef(null),
-    whyca: useRef(null),
-    responsibilities: useRef(null),
-    incentives: useRef(null),
-    faqs: useRef(null),
-  };
+// Helper component to scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
+  return null;
+};
 
-  const scrollTo = (section) => {
-    refs[section]?.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const location = useLocation();
-  const isMobile = window.innerWidth <= 768;
-
-  const [showRegister, setShowRegister] = useState(false);
-
-  const handleShowRegister = () => {
-    setShowRegister(true);
-    setTimeout(() => {
-      document.getElementById("mobile-register")?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-  };
-
+const MainContent = () => {
   return (
-    <div className="relative text-white min-h-screen flex flex-col overflow-hidden">
-      {/* 🌟 Background Video with Dark Shield */}
-<div className="fixed top-0 left-0 w-full h-full -z-10">
-  <video
-    autoPlay
-    loop
-    muted
-    playsInline
-    className="w-full h-full object-cover"
-  >
-    <source src="/background_50mb.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+    <div className="relative text-white bg-black min-h-screen flex flex-col font-['Poppins'] selection:bg-yellow-400 selection:text-black overflow-x-hidden">
+      <ScrollToTop />
+      <Navbar />
 
-  {/* 🔳 Dark Overlay */}
-  <div className="absolute inset-0 bg-black/40 "></div>
-</div>
-
-
-      <Navbar scrollTo={scrollTo} isMobile={isMobile} />
-
-      <main className="pt-20 pb-32 flex-grow">
-        {isMobile ? (
-          <div>
-            <div ref={refs.home}>
-              <Home scrollTo={scrollTo} showRegister={handleShowRegister} />
-            </div>
-            <div ref={refs.about}><AboutUs /></div>
-            <div ref={refs.whyca}><WhyCA /></div>
-            <div ref={refs.responsibilities}><Responsibilities /></div>
-            <div ref={refs.incentives}><Incentives /></div>
-            <div ref={refs.faqs}><FAQ /></div>
-
-            {showRegister && (
-              <div id="mobile-register">
-                <Register />
-              </div>
-            )}
-          </div>
-        ) : (
-          <Routes location={location}>
-            <Route path="/" element={<Home scrollTo={scrollTo} />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/whyca" element={<WhyCA />} />
-            <Route path="/responsibilities" element={<Responsibilities />} />
-            <Route path="/incentives" element={<Incentives />} />
-            <Route path="/faqs" element={<FAQ />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
-        )}
+      <main className="flex-grow pt-16 pb-0 w-full z-10">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<div className="max-w-7xl mx-auto px-4 sm:px-8 w-full"><AboutUs /></div>} />
+          <Route path="/whyca" element={<div className="max-w-7xl mx-auto px-4 sm:px-8 w-full"><WhyCA /></div>} />
+          <Route path="/responsibilities" element={<div className="max-w-7xl mx-auto px-4 sm:px-8 w-full"><Responsibilities /></div>} />
+          <Route path="/incentives" element={<div className="max-w-7xl mx-auto px-4 sm:px-8 w-full"><Incentives /></div>} />
+          <Route path="/faqs" element={<div className="max-w-7xl mx-auto px-4 sm:px-8 w-full"><FAQ /></div>} />
+          <Route path="/register" element={<div className="max-w-7xl mx-auto px-4 sm:px-8 w-full"><Register /></div>} />
+        </Routes>
       </main>
 
       <Footer />
@@ -98,8 +46,9 @@ const ScrollRouter = () => {
 
 const App = () => (
   <Router>
-    <ScrollRouter />
+    <MainContent />
   </Router>
 );
 
 export default App;
+
