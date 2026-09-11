@@ -46,74 +46,88 @@ const Responsibilities = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center space-y-12 py-6 text-left">
-      {/* Heading */}
-      <div className="text-center w-full max-w-4xl mx-auto space-y-3">
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight font-['Bungee',sans-serif]">
-          <span className="block text-white">YOUR RESPONSIBILITIES AS</span>
-          <span className="block bg-gradient-to-r from-yellow-300 via-amber-400 to-red-500 bg-clip-text text-transparent">
-            AMBASSADOR
+    <div className="w-full relative flex flex-col items-center py-6 text-left min-h-screen overflow-hidden">
+      {/* 🎬 Fixed 100% Viewport Edge-to-Edge Background Image Layer */}
+      <div className="fixed inset-0 z-0 w-full h-full overflow-hidden pointer-events-none">
+        <img
+          src="/images/responsibilities.png"
+          alt="Responsibilities Background"
+          className="w-full h-full object-cover object-center opacity-25 filter blur-[1px]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-[#121216]/90 to-[#121216]" />
+      </div>
+
+      {/* Centered Content Container */}
+      <div className="relative z-10 w-full max-w-7xl px-4 sm:px-8 space-y-16 flex flex-col items-center">
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center w-full max-w-4xl mx-auto space-y-3 pt-6"
+        >
+          <span className="text-xs font-extrabold text-yellow-400 uppercase tracking-widest block">
+            CAMPUS OUTREACH & LEADERSHIP
           </span>
-        </h1>
-        <p className="text-base sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-          As the sole ambassador of your institution, you sit at the epicenter of athletic outreach, driving student participation and logistics.
-        </p>
-      </div>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight font-['Bungee',sans-serif]">
+            <span className="block text-white">YOUR RESPONSIBILITIES AS</span>
+            <span className="block text-yellow-400">AMBASSADOR</span>
+          </h1>
+          <p className="text-base sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            As the sole ambassador of your institution, you sit at the epicenter of athletic outreach, driving student participation and logistics.
+          </p>
+        </motion.div>
 
-      {/* Hero Image Banner */}
-      <div className="w-full max-w-6xl relative h-64 sm:h-80 rounded-3xl overflow-hidden border border-yellow-500/30 shadow-2xl">
-        <img src="/images/responsibilities.png" alt="Responsibilities" className="w-full h-full object-cover object-center" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex items-end p-8">
-          <div>
-            <span className="px-3 py-1 rounded bg-yellow-400 text-black text-xs font-black uppercase tracking-widest">
-              CAMPUS OUTREACH & LEADERSHIP
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-white font-['Bungee'] uppercase mt-2">
-              LEAD YOUR INSTITUTION'S CONTINGENT
-            </h2>
-          </div>
-        </div>
-      </div>
+        {/* 4 Cards Grid */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.12 } },
+          }}
+          className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 pt-4"
+        >
+          {duties.map((item, idx) => (
+            <motion.div
+              key={idx}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+              }}
+              className="group p-8 rounded-2xl bg-black border border-yellow-500/20 hover:border-yellow-400 transition-all duration-300 hover:shadow-[0_0_25px_rgba(250,204,21,0.2)] flex flex-col justify-between space-y-6"
+            >
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-extrabold text-yellow-400 uppercase tracking-widest">
+                    {item.badge}
+                  </span>
+                  <span className="text-2xl font-black text-yellow-400 font-['Bungee']">
+                    {item.num}
+                  </span>
+                </div>
 
-      {/* 4 Cards Grid */}
-      <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-        {duties.map((item, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: idx * 0.1 }}
-            className="p-8 rounded-3xl bg-black/60 border border-yellow-500/30 backdrop-blur-xl hover:border-yellow-400 transition-all duration-300 hover:shadow-[0_0_25px_rgba(250,204,21,0.2)] flex flex-col justify-between space-y-4"
-          >
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="px-3 py-1 rounded-full text-xs font-bold bg-yellow-400/10 border border-yellow-400/30 text-yellow-300 uppercase tracking-widest">
-                  {item.badge}
-                </span>
-                <span className="text-2xl font-black text-amber-500 font-['Bungee']">
-                  {item.num}
-                </span>
+                <h3 className="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors uppercase font-['Ubuntu']">
+                  {item.title}
+                </h3>
+
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  {item.desc}
+                </p>
               </div>
 
-              <h3 className="text-xl font-bold text-white uppercase font-['Ubuntu']">
-                {item.title}
-              </h3>
-
-              <p className="text-sm text-gray-300 leading-relaxed">
-                {item.desc}
-              </p>
-            </div>
-
-            <div className="pt-4 border-t border-white/10 space-y-2">
-              {item.points.map((pt, pIdx) => (
-                <div key={pIdx} className="flex items-start space-x-2 text-xs text-gray-300">
-                  <span className="text-yellow-400 font-bold mt-0.5">•</span>
-                  <span>{pt}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        ))}
+              <div className="pt-4 border-t border-white/10 space-y-2">
+                {item.points.map((pt, pIdx) => (
+                  <div key={pIdx} className="flex items-start space-x-2 text-xs text-gray-300">
+                    <span className="text-yellow-400 font-bold mt-0.5">•</span>
+                    <span>{pt}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </div>
   );

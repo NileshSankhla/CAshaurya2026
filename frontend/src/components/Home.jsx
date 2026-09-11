@@ -5,10 +5,10 @@ import VideoPlayer from "./VideoPlayer";
 
 const Home = () => {
   const stats = [
-    { value: "500+", label: "COLLEGES REACH" },
-    { value: "₹5 Lakh+", label: "PRIZES & SWAG" },
-    { value: "50,000+", label: "FOOTFALL" },
-    { value: "100%", label: "EXPOSURE & LOR" },
+    { value: "500+", label: "PARTICIPANTS REGISTERED" },
+    { value: "30+", label: "EXCITING COMPETITIONS" },
+    { value: "30K+", label: "COLLEGES & PARTICIPANTS" },
+    { value: "75 YRS", label: "IIT KGP LEGACY" },
   ];
 
   const pageHighlights = [
@@ -22,7 +22,7 @@ const Home = () => {
     {
       title: "WHY BECOME A CA?",
       subtitle: "Leadership, Merch & National Exposure",
-      desc: "Develop management skills, network with student leaders, and earn exclusive rewards.",
+      desc: "Develop management skills, network with student leaders, climb leaderboard tiers, and earn exclusive rewards.",
       path: "/whyca",
       image: "/images/why_ca.png",
     },
@@ -32,13 +32,6 @@ const Home = () => {
       desc: "Lead student contingents, manage social media publicity, and represent your college.",
       path: "/responsibilities",
       image: "/images/responsibilities.png",
-    },
-    {
-      title: "INCENTIVES & LEADERBOARD",
-      subtitle: "Bronze, Silver & Gold Tiers",
-      desc: "Climb the leaderboard to earn free accommodation, VIP passes, LORs, and cash prizes.",
-      path: "/incentives",
-      image: "/images/incentives.png",
     },
     {
       title: "FREQUENTLY ASKED QUESTIONS",
@@ -56,11 +49,27 @@ const Home = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 25 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
   return (
     <div className="w-full flex flex-col items-center text-left">
       {/* 🎬 100% FULL SCREEN WIDTH HERO & STATS SECTION WITH VIDEO BACKGROUND */}
       <div className="w-full relative min-h-[600px] pt-12 pb-16 flex flex-col items-center justify-center overflow-hidden bg-black space-y-12">
-        {/* Background Video (Spans 100% full viewport width edge-to-edge) */}
+        {/* Background Video */}
         <video
           autoPlay
           loop
@@ -72,19 +81,30 @@ const Home = () => {
         </video>
 
         {/* Hero Content Grid */}
-        <div className="relative z-10 w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center px-4 sm:px-8">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="relative z-10 w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center px-4 sm:px-8"
+        >
           {/* Left Column: Clear Text & Call-to-Action */}
           <div className="lg:col-span-7 space-y-6">
-            <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight leading-none text-white font-['Bungee',sans-serif]">
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl sm:text-6xl font-black uppercase tracking-tight leading-none text-white font-['Bungee',sans-serif]"
+            >
               IGNITE THE ARENA
               <span className="block text-yellow-400 mt-2">SHAURYA CA PROGRAM</span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-base sm:text-xl text-gray-100 font-medium leading-relaxed max-w-xl">
+            <motion.p
+              variants={itemVariants}
+              className="text-base sm:text-xl text-gray-100 font-medium leading-relaxed max-w-xl"
+            >
               Be the official face of Shaurya on your campus. Lead student contingents, inspire young athletes, and represent IIT Kharagpur’s annual sports fest.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-wrap gap-4 pt-2">
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-4 pt-2">
               <Link
                 to="/register"
                 className="px-8 py-3.5 rounded font-extrabold text-sm uppercase text-black bg-yellow-400 hover:bg-yellow-300 transition-colors shadow-lg shadow-yellow-400/30"
@@ -97,12 +117,17 @@ const Home = () => {
               >
                 EXPLORE PROGRAM
               </Link>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* STATS BANNER (Transparent Floating over Video Background) */}
-        <div className="relative z-10 w-full max-w-7xl px-4 sm:px-8 pt-4">
+        {/* STATS BANNER */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="relative z-10 w-full max-w-7xl px-4 sm:px-8 pt-4"
+        >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6">
             {stats.map((stat, idx) => (
               <div key={idx} className="flex flex-col items-center text-center p-4 border-r border-yellow-500/30 last:border-r-0">
@@ -115,70 +140,94 @@ const Home = () => {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
 
-      {/* REST OF HOME PAGE CONTENT (Lighter shade of black #121216) */}
+      {/* REST OF HOME PAGE CONTENT */}
       <div className="w-full bg-[#121216] border-t border-yellow-500/20 py-12 flex justify-center">
         <div className="w-full max-w-7xl px-4 sm:px-8 space-y-16 flex flex-col items-center">
           {/* PROGRAM PAGES & VERTICALS */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="w-full space-y-8 pt-4 pb-4"
-          >
-            <div className="space-y-2 text-center">
+          <div className="w-full space-y-8 pt-4 pb-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="space-y-2 text-center"
+            >
               <h2 className="text-3xl sm:text-4xl font-extrabold uppercase text-yellow-400 font-['Bungee']">
-                PROGRAM PAGES & VERTICALS
+                PROGRAM & VERTICALS
               </h2>
               <p className="text-gray-300 text-sm sm:text-base max-w-xl mx-auto">
                 Click on any section below to navigate to its dedicated page view.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.1,
+                  },
+                },
+              }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
               {pageHighlights.map((item, idx) => (
-                <Link
+                <motion.div
                   key={idx}
-                  to={item.path}
-                  className="group relative rounded-2xl bg-[#1c1c22] border border-yellow-500/20 text-left transition-all duration-300 hover:border-yellow-400 hover:shadow-[0_0_25px_rgba(250,204,21,0.2)] flex flex-col justify-between overflow-hidden"
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+                  }}
                 >
-                  {/* Image Header */}
-                  <div className="relative h-48 w-full overflow-hidden bg-gray-900">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1c1c22] via-transparent to-transparent" />
-                    <span className="absolute bottom-3 left-4 inline-block px-3 py-1 rounded text-xs font-extrabold bg-yellow-400 text-black uppercase tracking-wider shadow-md">
-                      {item.title}
-                    </span>
-                  </div>
+                  <Link
+                    to={item.path}
+                    className="group relative rounded-2xl bg-black border border-yellow-500/20 text-left transition-all duration-300 hover:border-yellow-400 hover:shadow-[0_0_25px_rgba(250,204,21,0.2)] block overflow-hidden h-[380px]"
+                  >
+                    {/* Image Background */}
+                    <div className="absolute inset-0 w-full h-full bg-gray-900">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
 
-                  {/* Text Body */}
-                  <div className="p-6 flex flex-col flex-1 justify-between space-y-4 bg-[#1c1c22]">
-                    <div className="space-y-2">
-                      <h3 className="text-lg font-bold text-white group-hover:text-yellow-400 transition-colors">
-                        {item.subtitle}
+                    {/* Text Body Anchored to Bottom */}
+                    <div className="absolute bottom-0 left-0 w-full px-6 pb-6 pt-4 bg-black z-10">
+                      {/* Gradient Fade Above Text Body */}
+                      <div className="absolute bottom-full left-0 w-full h-24 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+                      
+                      <h3 className="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors leading-snug relative z-10">
+                        {item.title}
                       </h3>
-                      <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                        {item.desc}
-                      </p>
+                      
+                      <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows,opacity] duration-500 opacity-0 group-hover:opacity-100 relative z-10">
+                        <div className="overflow-hidden">
+                          <div className="pt-3 flex flex-col space-y-4">
+                            <p className="text-sm text-gray-300 leading-relaxed">
+                              {item.desc}
+                            </p>
+                            <div className="flex items-center text-xs font-bold text-yellow-400 uppercase">
+                              <span>Explore</span>
+                              <svg className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-
-                    <div className="pt-2 flex items-center text-xs font-bold text-yellow-400 group-hover:translate-x-1 transition-transform uppercase">
-                      <span>Explore Section</span>
-                      <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </div>
-                  </div>
-                </Link>
+                  </Link>
+                </motion.div>
               ))}
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>

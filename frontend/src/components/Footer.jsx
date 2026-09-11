@@ -4,12 +4,12 @@ import { FaLinkedin, FaInstagram, FaEnvelope, FaYoutube } from 'react-icons/fa';
 const Footer = () => {
   const contacts = [
     {
-      name: 'Gopichand',
+      name: 'Angothu Gopichand',
       role: 'PUBLICITY & MARKETING HEAD',
       image: '/logos/Gopichand.jpg',
-      linkedin: 'https://www.linkedin.com/company/shaurya-iit-kharagpur/',
-      instagram: 'https://www.instagram.com/shaurya.iitkgp/',
-      email: 'shaurya@iitkgp.ac.in',
+      linkedin: 'https://www.linkedin.com/in/gopichand-angothu-a0a231324?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+      instagram: 'https://www.instagram.com/mr_gopi_chand9?stkn=MTQ2dnJmeTB2cDJ6eA==',
+      email: 'angothugopichand.shaurya.iitkgp@gmail.com',
     },
     {
       name: 'Sutirtha',
@@ -26,7 +26,7 @@ const Footer = () => {
     `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
 
   return (
-    <footer className="w-full bg-black border-t border-yellow-500/30 pt-12 pb-8 px-6 text-white font-['Poppins']">
+    <footer className="relative z-30 w-full bg-black border-t border-yellow-500/30 pt-12 pb-8 px-6 text-white font-['Poppins']">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center lg:items-center gap-12 lg:gap-20">
 
         {/* 🏛️ LEFT SECTION — Organization Info (Logo -> Small Desc -> Contact Icons) */}

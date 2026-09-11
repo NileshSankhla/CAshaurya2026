@@ -108,8 +108,8 @@ export default function RegisterForm() {
     }
   };
 
-  const inputStyle = 'w-full px-4 py-2.5 rounded-xl bg-black/70 border border-yellow-500/30 text-white placeholder-gray-400 text-sm focus:outline-none focus:border-yellow-400 transition-colors';
-  const labelStyle = 'block text-xs font-bold uppercase tracking-wider text-yellow-200 mb-1';
+  const inputStyle = 'w-full px-4 py-2.5 rounded-xl bg-[#121216] border border-yellow-500/20 text-white placeholder-gray-400 text-sm focus:outline-none focus:border-yellow-400 transition-colors';
+  const labelStyle = 'block text-xs font-bold uppercase tracking-wider text-yellow-400 mb-1';
 
   return (
     <>
@@ -239,7 +239,7 @@ export default function RegisterForm() {
         </div>
 
         {/* Experience Radio */}
-        <div ref={refs.hasExperience} className="p-4 rounded-xl bg-black/40 border border-white/10 space-y-2">
+        <div ref={refs.hasExperience} className="p-4 rounded-xl bg-[#121216] border border-yellow-500/20 space-y-2">
           <label className={labelStyle}>
             Have you held a Campus Ambassador or leadership position before? *
           </label>
@@ -296,7 +296,7 @@ export default function RegisterForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-4 rounded-xl font-black text-sm tracking-wider uppercase text-black bg-gradient-to-r from-yellow-400 via-amber-400 to-red-500 hover:from-yellow-300 hover:to-red-400 shadow-[0_0_25px_rgba(250,204,21,0.5)] transition-all cursor-pointer mt-2"
+          className="w-full py-4 rounded-xl font-extrabold text-sm tracking-wider uppercase text-black bg-yellow-400 hover:bg-yellow-300 shadow-lg shadow-yellow-400/20 transition-all cursor-pointer mt-2"
         >
           {isSubmitting ? 'SUBMITTING APPLICATION...' : 'SUBMIT APPLICATION'}
         </button>

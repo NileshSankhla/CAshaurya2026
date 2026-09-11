@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,7 +11,6 @@ const Navbar = () => {
     { name: "ABOUT US", path: "/about" },
     { name: "WHY CA", path: "/whyca" },
     { name: "RESPONSIBILITIES", path: "/responsibilities" },
-    { name: "INCENTIVES", path: "/incentives" },
     { name: "FAQ", path: "/faqs" },
   ];
 
@@ -45,7 +45,11 @@ const Navbar = () => {
               >
                 {link.name}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-yellow-400 rounded-full" />
+                  <motion.span
+                    layoutId="navbar-indicator"
+                    className="absolute bottom-0 left-0 w-full h-[2px] bg-yellow-400 rounded-full"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
                 )}
               </Link>
             );
@@ -83,25 +87,33 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Drawer Menu */}
-      {menuOpen && (
-        <div className="lg:hidden bg-black border-b border-yellow-500/30 px-6 py-4 space-y-3">
-          {links.map((link) => {
-            const isActive = location.pathname === link.path;
-            return (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setMenuOpen(false)}
-                className={`block text-base font-semibold tracking-wider py-1.5 border-b border-white/10 ${
-                  isActive ? "text-yellow-400 pl-2" : "text-gray-300 hover:text-white"
-                }`}
-              >
-                {link.name}
-              </Link>
-            );
-          })}
-        </div>
-      )}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="lg:hidden bg-black border-b border-yellow-500/30 px-6 py-4 space-y-3 overflow-hidden"
+          >
+            {links.map((link) => {
+              const isActive = location.pathname === link.path;
+              return (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setMenuOpen(false)}
+                  className={`block text-base font-semibold tracking-wider py-1.5 border-b border-white/10 ${
+                    isActive ? "text-yellow-400 pl-2" : "text-gray-300 hover:text-white"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

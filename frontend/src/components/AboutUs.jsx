@@ -1,110 +1,142 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { FaMusic, FaTrophy, FaUsers, FaCalendarCheck } from "react-icons/fa";
 
 const AboutUs = () => {
-  const pillars = [
+  const highlights = [
     {
-      title: "PAN-INDIA ARENA",
-      desc: "Nationwide arena for elite college sports competition hosted by IIT Kharagpur.",
+      icon: FaMusic,
+      title: "Music, Sports & Competitions",
+      desc: "Immerse yourself in high-energy athletic tournaments and live cultural music events.",
     },
     {
-      title: "INCENTIVIZING TIERS",
-      desc: "Structured ambassador tiers offering rewards, VIP privileges, and certificates.",
+      icon: FaTrophy,
+      title: "Exciting prizes and giveaways!",
+      desc: "Compete for lucrative cash rewards, trophies, limited-edition merch & sponsor hampers.",
     },
     {
-      title: "PROMOTIONAL LEGACY",
-      desc: "Promote sports excellence and represent your institution on a national stage.",
+      icon: FaUsers,
+      title: "Join Hundreds of participants!",
+      desc: "Connect with passionate athletes and student ambassadors across India's top colleges.",
+    },
+    {
+      icon: FaCalendarCheck,
+      title: "Don't miss the Sports fest of IIT Kharagpur!",
+      desc: "Experience 3 unmissable days of fierce competition at Technology Students' Gymkhana.",
     },
   ];
 
-  const sports = [
-    "Cricket",
-    "Football",
-    "Basketball",
-    "Badminton",
-    "Tennis",
-    "Athletics",
-    "Chess",
-    "Volleyball",
-    "Table Tennis",
-    "Squash",
-    "Swimming",
+  const stats = [
+    { value: "500+", label: "Participants registered" },
+    { value: "30+", label: "Exciting competitions" },
+    { value: "30K+", label: "Colleges & participants" },
   ];
 
   return (
-    <div className="flex flex-col items-center space-y-12 py-6 text-left">
-      {/* Heading */}
-      <div className="text-center w-full max-w-4xl mx-auto space-y-3">
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight font-['Bungee',sans-serif]">
-          <span className="block text-white">WHERE CHAMPIONS ASCEND &</span>
-          <span className="block bg-gradient-to-r from-yellow-300 via-amber-400 to-red-500 bg-clip-text text-transparent">
-            LEGENDS COLLIDE
-          </span>
-        </h1>
-        <p className="text-base sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-          Shaurya is the premier annual inter-collegiate sports festival organized by the Technology Students' Gymkhana, Indian Institute of Technology Kharagpur. Celebrating 7+ years of athletic glory, Shaurya unites thousands of top collegiate athletes across India.
-        </p>
+    <div className="w-full relative flex flex-col items-center py-6 text-left min-h-screen overflow-hidden">
+      {/* 🎬 Fixed 100% Viewport Edge-to-Edge Background Image Layer */}
+      <div className="fixed inset-0 z-0 w-full h-full overflow-hidden pointer-events-none">
+        <img
+          src="/images/about_us.png"
+          alt="About Us Background"
+          className="w-full h-full object-cover object-center opacity-25 filter blur-[1px]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-[#121216]/90 to-[#121216]" />
       </div>
 
-      {/* Grid: Left Content + Right Card */}
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch pt-4">
-        {/* Left Column: 3 Feature Cards + Sports Tags */}
-        <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {pillars.map((pillar, idx) => (
-              <div
+      {/* Centered Content Container */}
+      <div className="relative z-10 w-full max-w-7xl px-4 sm:px-8 space-y-16 flex flex-col items-center">
+        {/* Heading & Quote Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center w-full max-w-4xl mx-auto space-y-4 pt-6"
+        >
+          <span className="text-xs sm:text-sm font-extrabold text-yellow-400 uppercase tracking-widest block">
+            ABOUT US
+          </span>
+
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight font-['Bungee',sans-serif]">
+            <span className="block text-white">SHAURYA IIT KHARAGPUR</span>
+          </h1>
+
+          {/* Official Quote */}
+          <div className="py-2">
+            <blockquote className="text-lg sm:text-2xl font-bold italic text-yellow-400 font-['Ubuntu'] tracking-wide">
+              “Brave hearts write history with courage, not ink”
+            </blockquote>
+          </div>
+
+          <p className="text-base sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Shaurya, IIT Kharagpur’s premier sports festival, returns with greater pride as the institute celebrates its 75 years of excellence and legacy. Join us to be part of the battle of skill, spirit and camaraderie.
+          </p>
+        </motion.div>
+
+        {/* 4 Feature Cards Grid */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.12 } },
+          }}
+          className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          {highlights.map((item, idx) => {
+            const IconComponent = item.icon;
+            return (
+              <motion.div
                 key={idx}
-                className="p-5 rounded-2xl bg-black/60 border border-yellow-500/30 backdrop-blur-md hover:border-yellow-400 transition-all duration-300 space-y-2"
+                variants={{
+                  hidden: { opacity: 0, y: 25 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                }}
+                className="p-6 rounded-2xl bg-black border border-yellow-500/20 hover:border-yellow-400 hover:shadow-[0_0_25px_rgba(250,204,21,0.2)] transition-all duration-300 flex items-start space-x-5 group"
               >
-                <h3 className="text-sm font-extrabold text-yellow-300 tracking-wider uppercase">
-                  {pillar.title}
-                </h3>
-                <p className="text-xs text-gray-300 leading-relaxed">
-                  {pillar.desc}
-                </p>
+                <div className="p-4 rounded-xl bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-2xl group-hover:bg-yellow-400 group-hover:text-black transition-colors flex-shrink-0">
+                  <IconComponent />
+                </div>
+                <div className="space-y-1.5">
+                  <h3 className="text-lg font-bold text-white group-hover:text-yellow-400 transition-colors uppercase font-['Ubuntu']">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-gray-300 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* 🏆 STATS BANNER ROW (500+, 30+, 30K+) */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="w-full max-w-5xl bg-black border border-yellow-500/30 rounded-2xl p-8 shadow-2xl"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-yellow-500/20 text-center">
+            {stats.map((stat, idx) => (
+              <div key={idx} className="flex flex-col items-center space-y-2 pt-4 md:pt-0">
+                <span className="text-4xl sm:text-5xl font-black text-yellow-400 font-['Bungee']">
+                  {stat.value}
+                </span>
+                <span className="text-sm font-bold text-gray-200 tracking-wide uppercase font-['Ubuntu']">
+                  {stat.label}
+                </span>
               </div>
             ))}
           </div>
-
-          {/* Ambassador Disciplines */}
-          <div className="p-6 rounded-2xl bg-black/60 border border-yellow-500/30 backdrop-blur-md space-y-3">
-            <h4 className="text-xs font-bold tracking-widest text-amber-400 uppercase">
-              SPECIAL AMBASSADOR DISCIPLINES
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {sports.map((sport, idx) => (
-                <span
-                  key={idx}
-                  className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-400/10 border border-yellow-400/20 text-gray-200 hover:text-yellow-300 hover:border-yellow-400 transition-colors cursor-default"
-                >
-                  {sport}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Gymkhana Shakti Visual Card */}
-        <div className="lg:col-span-5 relative group overflow-hidden rounded-3xl border border-yellow-500/40 min-h-[340px] bg-gradient-to-br from-red-950/40 via-black to-yellow-950/40 backdrop-blur-xl flex flex-col justify-end p-8 shadow-[0_0_30px_rgba(0,0,0,0.8)]">
-          <div className="absolute inset-0 bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" style={{ backgroundImage: "url('/images/about_us.png')" }} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-          
-          <div className="relative z-10 space-y-3">
-            <span className="px-3 py-1 rounded-full text-xs font-bold bg-red-500/20 border border-red-500/40 text-red-300 uppercase tracking-widest inline-block">
-              IIT KHARAGPUR SHAKTI
-            </span>
-            <h3 className="text-2xl font-black text-white uppercase font-['Bungee']">
-              7TH EDITION ATHLETIC EXTRAVAGANZA
-            </h3>
-            <p className="text-xs text-gray-300 leading-relaxed">
-              Join 500+ colleges nationwide in celebrating the raw spirit of sportsmanship at Technology Students' Gymkhana, IIT Kharagpur.
-            </p>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
 };
 
 export default AboutUs;
+
 

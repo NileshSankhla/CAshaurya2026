@@ -8,7 +8,6 @@ import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
 import WhyCA from "./components/WhyCA";
 import Responsibilities from "./components/Responsibilities";
-import Incentives from "./components/Incentives";
 import FAQ from "./components/FAQs";
 import Register from "./components/Register";
 
@@ -27,15 +26,14 @@ const MainContent = () => {
       <ScrollToTop />
       <Navbar />
 
-      <main className="flex-grow pt-16 pb-0 w-full z-10">
+      <main className="flex-grow pt-16 pb-12 w-full z-10 bg-[#121216]">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<div className="max-w-7xl mx-auto px-4 sm:px-8 w-full"><AboutUs /></div>} />
-          <Route path="/whyca" element={<div className="max-w-7xl mx-auto px-4 sm:px-8 w-full"><WhyCA /></div>} />
-          <Route path="/responsibilities" element={<div className="max-w-7xl mx-auto px-4 sm:px-8 w-full"><Responsibilities /></div>} />
-          <Route path="/incentives" element={<div className="max-w-7xl mx-auto px-4 sm:px-8 w-full"><Incentives /></div>} />
-          <Route path="/faqs" element={<div className="max-w-7xl mx-auto px-4 sm:px-8 w-full"><FAQ /></div>} />
-          <Route path="/register" element={<div className="max-w-7xl mx-auto px-4 sm:px-8 w-full"><Register /></div>} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/whyca" element={<WhyCA />} />
+          <Route path="/responsibilities" element={<Responsibilities />} />
+          <Route path="/faqs" element={<FAQ />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </main>
 

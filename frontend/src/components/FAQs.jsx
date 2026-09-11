@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
@@ -97,135 +97,187 @@ const FAQ = () => {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-12 py-6 text-left">
-      {/* Heading */}
-      <div className="text-center w-full max-w-4xl mx-auto space-y-3">
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight font-['Bungee',sans-serif]">
-          <span className="block text-white">FREQUENTLY ASKED</span>
-          <span className="block bg-gradient-to-r from-yellow-300 via-amber-400 to-red-500 bg-clip-text text-transparent">
-            QUESTIONS
+    <div className="w-full relative flex flex-col items-center py-6 text-left min-h-screen overflow-hidden">
+      {/* 🎬 Fixed 100% Viewport Edge-to-Edge Background Image Layer (No zoom on content expand) */}
+      <div className="fixed inset-0 z-0 w-full h-full overflow-hidden pointer-events-none">
+        <img
+          src="/images/faqs.png"
+          alt="FAQs Background"
+          className="w-full h-full object-cover object-center opacity-25 filter blur-[1px]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-[#121216]/90 to-[#121216]" />
+      </div>
+
+      {/* Centered Content Container */}
+      <div className="relative z-10 w-full max-w-7xl px-4 sm:px-8 space-y-12 flex flex-col items-center">
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center w-full max-w-4xl mx-auto space-y-3 pt-6"
+        >
+          <span className="text-xs font-extrabold text-yellow-400 uppercase tracking-widest block">
+            NEED CLARIFICATION?
           </span>
-        </h1>
-        <p className="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-          Everything you need to know about the Shaurya Campus Ambassador Program, tasks, and reward structure.
-        </p>
-      </div>
-
-      {/* ACCORDION LIST */}
-      <div className="w-full max-w-4xl space-y-4">
-        {faqs.map((faq, index) => (
-          <div
-            key={index}
-            className="bg-black/60 border border-yellow-500/30 rounded-2xl overflow-hidden backdrop-blur-xl shadow-lg transition-all duration-300 hover:border-yellow-400"
-          >
-            <button
-              className="w-full p-6 text-left flex justify-between items-center text-sm sm:text-base font-extrabold uppercase font-['Ubuntu'] text-yellow-300 hover:text-white transition-colors"
-              onClick={() => toggle(index)}
-            >
-              <span>{faq.question}</span>
-              <span className="ml-4 text-xl font-bold text-amber-400">
-                {activeIndex === index ? '−' : '+'}
-              </span>
-            </button>
-
-            {activeIndex === index && (
-              <div className="px-6 pb-6 pt-0 text-sm sm:text-base text-gray-300 leading-relaxed border-t border-white/5 mt-2">
-                <p className="pt-3">{faq.answer}</p>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* ASK QUESTION FORM BOX */}
-      <div className="w-full max-w-2xl mt-8 p-8 rounded-3xl bg-black/70 border border-yellow-500/40 backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.8)] space-y-6">
-        <div className="text-center space-y-1">
-          <h3 className="text-2xl font-black text-yellow-300 font-['Bungee'] uppercase">
-            HAVE A QUESTION? ASK US DIRECTLY
-          </h3>
-          <p className="text-xs text-gray-300">
-            Submit your query and our Campus Ambassador team will respond shortly.
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight font-['Bungee',sans-serif]">
+            <span className="block text-white">FREQUENTLY ASKED</span>
+            <span className="block text-yellow-400">QUESTIONS</span>
+          </h1>
+          <p className="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            Everything you need to know about the Shaurya Campus Ambassador Program, tasks, and reward structure.
           </p>
-        </div>
+        </motion.div>
 
-        {submitted && (
-          <div className="p-3 rounded-xl bg-green-500/20 border border-green-500/40 text-green-300 text-sm font-semibold text-center">
-            Your question has been submitted successfully!
+        {/* ACCORDION LIST */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.1 } },
+          }}
+          className="w-full max-w-4xl space-y-4"
+        >
+          {faqs.map((faq, index) => (
+            <motion.div
+              key={index}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+              }}
+              className="bg-black border border-yellow-500/20 hover:border-yellow-400 rounded-2xl overflow-hidden shadow-lg transition-all duration-300"
+            >
+              <button
+                className="w-full p-6 text-left flex justify-between items-center text-sm sm:text-base font-extrabold uppercase font-['Ubuntu'] text-white hover:text-yellow-400 transition-colors"
+                onClick={() => toggle(index)}
+              >
+                <span>{faq.question}</span>
+                <motion.span
+                  animate={{ rotate: activeIndex === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="ml-4 text-xl font-bold text-yellow-400"
+                >
+                  {activeIndex === index ? '−' : '+'}
+                </motion.span>
+              </button>
+
+              <AnimatePresence>
+                {activeIndex === index && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-6 pt-0 text-sm sm:text-base text-gray-300 leading-relaxed border-t border-white/10 mt-2">
+                      <p className="pt-3">{faq.answer}</p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* ASK QUESTION FORM BOX */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="w-full max-w-2xl mt-4 p-8 rounded-2xl bg-black border border-yellow-500/20 hover:border-yellow-400/50 shadow-2xl transition-all duration-300 space-y-6"
+        >
+          <div className="text-center space-y-1">
+            <h3 className="text-2xl font-black text-yellow-400 font-['Bungee'] uppercase">
+              HAVE A QUESTION? ASK US DIRECTLY
+            </h3>
+            <p className="text-xs text-gray-300">
+              Submit your query and our Campus Ambassador team will respond shortly.
+            </p>
           </div>
-        )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-yellow-200 mb-1">
-              Full Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              placeholder="e.g. Rahul Sharma"
-              value={form.name}
-              onChange={handleChange}
-              className="w-full px-4 py-2.5 bg-black/60 border border-yellow-500/30 rounded-xl text-white text-sm focus:outline-none focus:border-yellow-400"
-            />
-            {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
-          </div>
+          {submitted && (
+            <div className="p-3 rounded-xl bg-green-500/20 border border-green-500/40 text-green-300 text-sm font-semibold text-center">
+              Your question has been submitted successfully!
+            </div>
+          )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-yellow-200 mb-1">
-                Phone Number (10 Digits)
+              <label className="block text-xs font-bold uppercase tracking-wider text-yellow-400 mb-1">
+                Full Name
               </label>
               <input
                 type="text"
-                name="phone"
-                placeholder="e.g. 9876543210"
-                value={form.phone}
+                name="name"
+                placeholder="e.g. Rahul Sharma"
+                value={form.name}
                 onChange={handleChange}
-                maxLength={10}
-                className="w-full px-4 py-2.5 bg-black/60 border border-yellow-500/30 rounded-xl text-white text-sm focus:outline-none focus:border-yellow-400"
+                className="w-full px-4 py-3 bg-[#121216] border border-yellow-500/20 rounded-xl text-white text-sm focus:outline-none focus:border-yellow-400 transition-colors"
               />
-              {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
+              {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-yellow-400 mb-1">
+                  Phone Number (10 Digits)
+                </label>
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder="e.g. 9876543210"
+                  value={form.phone}
+                  onChange={handleChange}
+                  maxLength={10}
+                  className="w-full px-4 py-3 bg-[#121216] border border-yellow-500/20 rounded-xl text-white text-sm focus:outline-none focus:border-yellow-400 transition-colors"
+                />
+                {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-yellow-400 mb-1">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="e.g. rahul@gmail.com"
+                  value={form.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-[#121216] border border-yellow-500/20 rounded-xl text-white text-sm focus:outline-none focus:border-yellow-400 transition-colors"
+                />
+                {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+              </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-yellow-200 mb-1">
-                Email Address
+              <label className="block text-xs font-bold uppercase tracking-wider text-yellow-400 mb-1">
+                Your Question
               </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="e.g. rahul@gmail.com"
-                value={form.email}
+              <textarea
+                name="question"
+                rows={3}
+                placeholder="Type your inquiry here..."
+                value={form.question}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 bg-black/60 border border-yellow-500/30 rounded-xl text-white text-sm focus:outline-none focus:border-yellow-400"
+                className="w-full px-4 py-3 bg-[#121216] border border-yellow-500/20 rounded-xl text-white text-sm focus:outline-none focus:border-yellow-400 transition-colors"
               />
-              {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+              {errors.question && <p className="text-red-400 text-xs mt-1">{errors.question}</p>}
             </div>
-          </div>
 
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-yellow-200 mb-1">
-              Your Question
-            </label>
-            <textarea
-              name="question"
-              rows={3}
-              placeholder="Type your inquiry here..."
-              value={form.question}
-              onChange={handleChange}
-              className="w-full px-4 py-2.5 bg-black/60 border border-yellow-500/30 rounded-xl text-white text-sm focus:outline-none focus:border-yellow-400"
-            />
-            {errors.question && <p className="text-red-400 text-xs mt-1">{errors.question}</p>}
-          </div>
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full py-3.5 rounded-xl text-sm font-extrabold tracking-wider uppercase text-black bg-gradient-to-r from-yellow-400 via-amber-400 to-red-500 hover:from-yellow-300 hover:to-red-400 shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all"
-          >
-            {isSubmitting ? 'SUBMITTING...' : 'SUBMIT QUESTION'}
-          </button>
-        </form>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-3.5 rounded font-extrabold text-xs tracking-wider uppercase text-black bg-yellow-400 hover:bg-yellow-300 transition-all shadow-lg shadow-yellow-400/20 cursor-pointer"
+            >
+              {isSubmitting ? 'SUBMITTING...' : 'SUBMIT QUESTION'}
+            </button>
+          </form>
+        </motion.div>
       </div>
     </div>
   );
